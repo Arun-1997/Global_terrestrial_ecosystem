@@ -10,6 +10,9 @@ Note: Loading the site will take a few seconds
 
 ![Alt text](screenshots/screenshot_2.jpg?raw=true "Title")
 
+Site link: https://arun-1997.github.io/global_terrestrial_ecosystem/
+
 
 Data Source: http://maps.tnc.org/gis_data.html (The Nature Conservancy)
-Site link: https://arun-1997.github.io/global_terrestrial_ecosystem/
+
+
