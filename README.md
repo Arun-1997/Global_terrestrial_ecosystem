@@ -6,8 +6,10 @@ A visualization of the different ecosystems using leaflet js
 
 Use the layers to icon at the top right corner to toggle the different types. By default, it is unchecked for the map to load smoothly.
 
+Note: Loading the site will take a few seconds
 
 ![Alt text](screenshots/screenshot_2.jpg?raw=true "Title")
 
 
+Data Source: http://maps.tnc.org/gis_data.html (The Nature Conservancy)
 Site link: https://arun-1997.github.io/global_terrestrial_ecosystem/
