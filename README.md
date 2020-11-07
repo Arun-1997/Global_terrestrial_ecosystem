@@ -4,7 +4,7 @@ A visualization of the different ecosystems using leaflet js
 ![Alt text](screenshots/screenshot_1.jpg?raw=true "Title")
 
 
-Use the layers to icon at the top right corner to toggle the different types. By default, it is unchecked for the map to load smoothly.
+Use the layers icon at the top right corner to toggle the different types. By default, it is unchecked for the map to load smoothly.
 
 Note: Loading the site will take a few seconds
 
