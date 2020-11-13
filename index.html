@@ -26,37 +26,25 @@
       </style>
       <script type="text/javascript">
 
-          var mymap = L.map('mapid').setView([20, 80], 3);
+          var mymap = L.map('mapid').setView([13.080743, 80.266416], 11);
           L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
           attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
           maxZoom: 18,
-          id: 'mapbox/dark-v10',
+          id: 'mapbox/satellite-v9',
           tileSize: 512,
           zoomOffset: -1,
           accessToken: 'pk.eyJ1IjoiYXJ1bjk3IiwiYSI6ImNrMnBzbnp5ejA3NTUzZHA3Z3lrbHVvMGQifQ.a3Rqxf-rzJ_d6l26EnarmA'
           }).addTo(mymap);
           
-          function getColor(d) {
-           
-              return d == 1 ? '#00441b' :
-                    d == 2  ? '#006d2c' :
-                    d < 4  ? '#238b45' :
-                    d < 6  ? '#41ab5d' :
-                    d < 8  ? '#74c476' :
-                    d < 10  ? '#a1d99b' :
-                    d < 12  ? '#c7e9c0' :
-                    d < 14  ? '#e5f5e0':
-                    d < 99   ? '#f7fcf5':
-                    '#f7fcf0';  
-          }     
+     
           function style(feature) {
               return {
-                  fillColor: getColor(feature.properties.WWF_MHTNUM),
-                  weight: 1,
+                  fillColor: '#ffffff',
+                  weight: 3,
                   opacity: 1,
                   color: 'white',
                   dashArray: '2',
-                  fillOpacity: 0.7
+                  fillOpacity: 0
               };
           }
           // var shpfile = new L.Shapefile('terr-ecoregions-TNC.zip',{style: style}); 
@@ -65,7 +53,7 @@
 
 
          
-          shp('terr-ecoregions-TNC.zip').then(function(data){
+          shp('grid_wise_overlapping_layers.zip').then(function(data){
                 
                 var dat = data["features"]
                   
@@ -122,33 +110,11 @@
         shpfile.resetStyle(e.target);
           info.update();
       }
-      var shpfile = new L.Shapefile('terr-ecoregions-TNC.zip',{style: style,onEachFeature: onEachFeatureAll});
-      // geojson =shpfile.addTo(mymap);
+      var shpfile = new L.Shapefile('grid_wise_overlapping_layers.zip',{style: style,onEachFeature: onEachFeatureAll});
+      geojson =shpfile.addTo(mymap);
       gjson = {};
       var baseLayers = {};
-      for(var j in categories){
-        // categories[j].addTo(mymap);
-        function onEachFeature(feature, layer) {
-          layer.on({
-              mouseover: highlightFeature,
-              mouseout: resetHighlight,
-              click: zoomToFeature
-          });
-      }
-      function zoomToFeature(e) {
-        mymap.fitBounds(e.target.getBounds());
-      }
-      function resetHighlight(e) {
-        gjson[j].resetStyle(e.target);
-          info.update();
-      }
-        var geoJSON
-        geoJSON = L.geoJSON(categories[j],{style: style,onEachFeature: onEachFeature});
-        gjson[j] = geoJSON
-
-        baseLayers[j] = gjson[j]
-      }
-      baseLayers["All Ecosystems"] = shpfile;
+ 
       
       var info = L.control();
 
@@ -162,29 +128,14 @@
 
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
-            this._div.innerHTML = '<h3>Global Terrestrial Ecosystem</h3>' +  (props ?
-                'Ecosystem Name : ' + props.ECO_NAME + '<br />Type of Ecosystem : ' + props.WWF_MHTNAM
+          console.log(props)
+            this._div.innerHTML = '<h3>Grid Wise Vegetation Coverage</h3>' +  (props ?
+                'Grid Name : Grid ' + props.id + '<br />Vegetation Area : ' + props.area_sq_m + ' sq. m'
                 : 'Hover over an area');
         };
 
         info.addTo(mymap);
-       
-      //   mymap.on('click', function() {
-      //   if(mymap.hasLayer(shpfile)) {
-      //     mymap.removeLayer(shpfile);
-      //   } else {
-      //     mymap.addLayer(shpfile);
-      //   }
-      // });
-
-      // console.log(shpfile)
-
-      
-     
-      eco_layers = L.control
-      
-   
-      eco_layers.layers(null,baseLayers,false).addTo(mymap);
+ 
           });
       </script>
 
